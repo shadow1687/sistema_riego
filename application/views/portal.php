@@ -685,7 +685,7 @@
     <!-- Morris Charts JavaScript -->
     <script src=<?php echo  base_url() . "bootstrap/vendor/raphael/raphael.min.js"?> ></script>
     <script src=<?php echo  base_url() . "bootstrap/vendor/morrisjs/morris.min.js"?> ></script>
-    <script src=<?php echo  base_url() . "data/morris-data.js"?> ></script>
+    <script src=<?php echo  base_url() . "bootstrap/data/morris-data.js"?> ></script>
 
     <!-- Custom Theme JavaScript -->
     <script src=<?php echo  base_url() ."bootstrap/dist/js/sb-admin-2.js" ?> ></script>
