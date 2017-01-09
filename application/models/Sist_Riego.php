@@ -1,12 +1,12 @@
 <?php
 
 class Sist_Riego extends CI_Model {
-	
+
 	function __construct(){
 		parent::__construct();
 		$this->load->database();
 	}
-	
+
 	public function get_mensajes()
 	{
 
@@ -31,11 +31,11 @@ class Sist_Riego extends CI_Model {
 			$qry = "INSERT INTO riego_config VALUES ('{$id}','{$ssid}','{$pass}','{$ip}','',1,sysdate());";
 		}
 		else{//si existe reemplazo la configuración
-			$qry=" UPDATE riego_config 
+			$qry=" UPDATE riego_config
 					SET ssid='{$ssid}',
 						pass='{$pass}',
 						ip='{$ip}'
-					WHERE	
+					WHERE
 						id='{$id}';";
 		}
 		//var_dump($qry);exit;
