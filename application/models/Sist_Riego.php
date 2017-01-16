@@ -9,10 +9,13 @@ class Sist_Riego extends CI_Model {
 
 	public function get_mensajes()
 	{
-
 		$qry="SELECT * FROM prueba;";
 		$res=$this -> db -> query($qry);
 		return $res->result_array();
+	}
+
+	public function get_modulo_cliente(id_cliente){
+		$qry="Select "
 	}
 
 	public function set_mensajes($mensaje)
@@ -24,21 +27,21 @@ class Sist_Riego extends CI_Model {
 
 	public function registrarAlta($id,$ssid,$pass,$ip){
 		//verifico si el ESP8266 ya existe
-		$qry="SELECT 1 FROM riego_config WHERE id='{$id}'";
+		$qry="SELECT 1 FROM modulo WHERE serial='{$id}'";
 		$existe=$this -> db -> query($qry);
 		//var_dump($existe -> result_id -> num_rows );exit;
 		if($existe -> result_id -> num_rows==NULL){//si no existe agrego el nuevo registro
-			$qry = "INSERT INTO riego_config VALUES ('{$id}','{$ssid}','{$pass}','{$ip}','',1,sysdate());";
+			$qry = "INSERT INTO modulo VALUES ('{$id}','{$ip}','{$ssid}','{$pass}',1,1,null,1,sysdate());";
 		}
 		else{//si existe reemplazo la configuración
-			$qry=" UPDATE riego_config
+			$qry=" UPDATE modulo
 					SET ssid='{$ssid}',
-						pass='{$pass}',
+						password='{$pass}',
 						ip='{$ip}'
 					WHERE
-						id='{$id}';";
+						serial='{$id}';";
 		}
-		//var_dump($qry);exit;
+
 		$res=$this -> db -> simple_query($qry);
 		if($res){
 			return array("success" => TRUE,"msg" => "", "result" => "t|a|r|e|a");

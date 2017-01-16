@@ -17,7 +17,6 @@ USE `sistema_riego`;
 
 -- Volcando estructura para tabla sistema_riego.modulo
 CREATE TABLE IF NOT EXISTS `modulo` (
-  `id` bigint(20) NOT NULL auto_increment,
   `serial` varchar(50) default NULL,
   `ip` varchar(50) default NULL,
   `ssid` varchar(50) default NULL,
@@ -26,8 +25,9 @@ CREATE TABLE IF NOT EXISTS `modulo` (
   `habilitado` bit(1) default NULL,
   `ultima_hora_conexion` datetime default NULL,
   `estado` bit(1) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ts` timestamp,
+  PRIMARY KEY  (`serial`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla sistema_riego.modulo: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
@@ -35,15 +35,13 @@ CREATE TABLE IF NOT EXISTS `modulo` (
 
 
 -- Volcando estructura para tabla sistema_riego.regada_forzada
-CREATE TABLE IF NOT EXISTS `regada_forzada` (
-  `id` int(11) NOT NULL auto_increment,
+CREATE TABLE IF NOT EXISTS `riego_forzado` (
+  `serial` varchar(50) default NULL,
   `descripcion` varchar(50) default NULL,
   `id_modulo` bigint(20) default NULL,
   `estado` bit(1) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `FK_regada_forzada_modulo` (`id_modulo`),
-  CONSTRAINT `FK_regada_forzada_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY  (`serial`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla sistema_riego.regada_forzada: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `regada_forzada` DISABLE KEYS */;
@@ -51,18 +49,16 @@ CREATE TABLE IF NOT EXISTS `regada_forzada` (
 
 
 -- Volcando estructura para tabla sistema_riego.regada_planificada
-CREATE TABLE IF NOT EXISTS `regada_planificada` (
-  `id` bigint(20) NOT NULL auto_increment,
+CREATE TABLE IF NOT EXISTS `riego_planificado` (
+  `serial` varchar(50) default NULL,
   `fecha_hora` datetime default NULL,
   `descipcion` varchar(50) default NULL,
   `id_modulo` bigint(20) default NULL,
   `estado` bit(1) default NULL,
   `repetir` bit(1) default NULL,
   `periodo_repeticion` varchar(50) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `FK_regada_planificada_modulo` (`id_modulo`),
-  CONSTRAINT `FK_regada_planificada_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY  (`serial`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla sistema_riego.regada_planificada: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `regada_planificada` DISABLE KEYS */;
@@ -81,11 +77,15 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `apellido` varchar(50) default NULL,
   `email` varchar(50) default NULL,
   `rol` varchar(50) default NULL,
-  `id_modulo` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `FK_usuario_modulo` (`id_modulo`),
-  CONSTRAINT `FK_usuario_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `serial` varchar(50) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+insert into usuario values(0,'usuario1','123456',1,0,null,'usuario1','apellido1','usuario1@email.com','cliente','9d2b69');
+insert into usuario values(0,'usuario2','123456',1,0,null,'usuario2','apellido2','usuario2@email.com','cliente',null);
+
+
 
 -- Volcando datos para la tabla sistema_riego.usuario: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;

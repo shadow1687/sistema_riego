@@ -1,3 +1,15 @@
+#include <ESP8266WiFi.h>
+#include <WiFiClient.h>
+#include <ESP8266HTTPClient.h>
+
+const char* ssid     = ;
+const char* password = ;
+
+const char* host = ;//servidor en maquina virtual
+const int httpPort = 80;
+const String url = "http://" + String(host) + ":" + httpPort + "/sist_riego/index.php/Interact/registrar";
+
+String configuracion;
 
 void setup() {
   Serial.begin(115200);
