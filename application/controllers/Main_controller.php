@@ -25,7 +25,7 @@ class Main_controller extends CI_Controller {
 
 		$this -> load -> model("Sist_Riego");
 
-		$data["rows"]=$this -> Sist_Riego -> get_mensajes();
+		$data["estado"]=$this -> Sist_Riego -> get_modulo_status('9d2b69');
 		$this->load->view('portal',$data);
 	}
 }

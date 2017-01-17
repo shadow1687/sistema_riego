@@ -1,6 +1,6 @@
 <?php
-
-class Sist_Riego extends CI_Model {
+require_once APPPATH.'models/Model_Generic.php';
+class Sist_Riego extends Model_Generic {
 
 	function __construct(){
 		parent::__construct();
@@ -14,16 +14,32 @@ class Sist_Riego extends CI_Model {
 		return $res->result_array();
 	}
 
-	public function get_modulo_cliente(id_cliente){
-		$qry="Select "
+	public function get_modulo_status($serial){
+		$query="SELECT IFNULL(estado,0) estado FROM modulo WHERE serial='{$serial}' and ts>(sysdate() - INTERVAL 5 MINUTE);";
+		$result=$this -> qry_exec($query,$this ->db,'value',array("manage_exception" => TRUE));
+		if($result["success"] && $result["result"]!=NULL){
+			return $result["result"];
+		}
+		else{
+			if(!$result["success"]){
+				return $result["msg"];
+			}
+			else{//inactivo
+				return 0;
+			}
+		}
 	}
 
-	public function set_mensajes($mensaje)
-	{
-		$qry="INSERT INTO prueba VALUES(0,'{$mensaje}',sysdate());";
-		$res=$this -> db -> query($qry);
-		return $res;
+	public function get_modulo_cliente($id_cliente){
+		$qry="Select ";
 	}
+
+	// public function set_mensajes($mensaje)
+	// {
+	// 	$qry="INSERT INTO prueba VALUES(0,'{$mensaje}',sysdate());";
+	// 	$res=$this -> db -> query($qry);
+	// 	return $res;
+	// }
 
 	public function registrarAlta($id,$ssid,$pass,$ip){
 		//verifico si el ESP8266 ya existe

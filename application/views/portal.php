@@ -142,11 +142,12 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-play-circle fa-5x"></i>
+                                  <?php  echo ($estado==1) ? '<i class="fa fa-play-circle fa-5x"></i>' : '<i class="fa fa-pause-circle fa-5x"></i>'  ?>
+
                                 </div>
                                 <div class="col-xs-9 text-left">
-                                    <div class="huge">Estado Actual</div>
-                                    <div>New Comments!</div>
+                                    <div class="huge"><?php echo ($estado==1) ? "Activo" : "Inactivo" ?></div>
+                                    <div><?php echo ($estado==1) ? "Modulo Activo" : "Modulo Inactivo" ?></div>
                                 </div>
                             </div>
                         </div>
