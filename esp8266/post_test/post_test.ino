@@ -1,11 +1,9 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266HTTPClient.h>
+#include "utils.h"
 
-const char* ssid     = "ColgateDeEsta";
-const char* password = "M1_c0N7r4S3n14";
 
-const char* host = "192.168.0.104";//servidor en maquina virtual
 const int httpPort = 80;
 const String url = "http://" + String(host) + ":" + httpPort + "/sist_riego/index.php/Interact/registrar";
 
