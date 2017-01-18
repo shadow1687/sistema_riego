@@ -17,6 +17,7 @@ class Sist_Riego extends Model_Generic {
 	public function get_modulo_status($serial){
 		$query="SELECT IFNULL(estado,0) estado FROM modulo WHERE serial='{$serial}' and ts>(sysdate() - INTERVAL 5 MINUTE);";
 		$result=$this -> qry_exec($query,$this ->db,'value',array("manage_exception" => TRUE));
+
 		if($result["success"] && $result["result"]!=NULL){
 			return $result["result"];
 		}

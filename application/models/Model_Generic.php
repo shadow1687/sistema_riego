@@ -24,10 +24,11 @@ public function qry_exec($query,$db,$type,$config=array()){
                         case 'row'    : $result = $qry -> row();break;
                         case 'value'  : {
                                           $row = $qry -> row_array();
+
 																					if(is_array($row)){
 																						$result = reset($row);
 																					}
-                                          {
+                                          else{
 																						$result=NULL;
 																					}
                         }break;
