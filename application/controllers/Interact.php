@@ -15,18 +15,19 @@ class Interact extends CI_Controller {
 	public function registrar()
 	{
 		extract($this -> input -> post(),EXTR_OVERWRITE);
-		Logger::debug($command,$id,$ssid,$pass,$ip);
-		
+		//Logger::debug($command,$id,$ssid,$pass,$ip);
+
 		switch($command){
 			case "start":{//se conecto un ESP8266
 								$alta=$this -> Sist_Riego -> registrarAlta($id,$ssid,$pass,$ip);
+								var_dump($alta);exit;
 								if($alta["sucess"]){
 									//envio tarea del dia
 									echo $alta["result"];
 									//echo $this -> Sist_Riego -> sendSchedule($id);
 								}
 								else{//adeams del log no podemos hacer nada ya que lo que no se hizo no se puede recuperar
-									Logger::warn($alta);
+									//Logger::warn($alta);
 								}
 			};break;
 			case "complete":{//ESP8266 completo una tarea
@@ -36,7 +37,7 @@ class Interact extends CI_Controller {
 									echo $this -> Sist_Riego -> sendSchedule($id);
 								}
 								else{//adeams del log no podemos hacer nada ya que lo que no se hizo no se puede recuperar
-									Logger::warn($reg["msg"]);
+									//Logger::warn($reg["msg"]);
 								}
 			}break;
 			case "prueba":{

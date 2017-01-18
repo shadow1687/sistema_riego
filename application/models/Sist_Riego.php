@@ -16,6 +16,7 @@ class Sist_Riego extends Model_Generic {
 
 	public function get_modulo_status($serial){
 		$query="SELECT IFNULL(estado,0) estado FROM modulo WHERE serial='{$serial}' and ts>(sysdate() - INTERVAL 5 MINUTE);";
+		var_dump($query);exit;
 		$result=$this -> qry_exec($query,$this ->db,'value',array("manage_exception" => TRUE));
 		if($result["success"] && $result["result"]!=NULL){
 			return $result["result"];
@@ -53,7 +54,8 @@ class Sist_Riego extends Model_Generic {
 			$qry=" UPDATE modulo
 					SET ssid='{$ssid}',
 						password='{$pass}',
-						ip='{$ip}'
+						ip='{$ip}',
+						ts=sysdate()
 					WHERE
 						serial='{$id}';";
 		}
