@@ -23,9 +23,18 @@ class Main_controller extends CI_Controller {
 	{
 		$data=array();
 
-		$this -> load -> model("Sist_Riego");
 
-		$data["estado"]=$this -> Sist_Riego -> get_modulo_status('13216');
-		$this->load->view('portal',$data);
+		$data["estado"]=1;
+		$this -> load -> view("login");
+		//$this->load->view('portal',$data);
+	}
+
+	public function load_variables(){
+		$js_to_load=array( );
+		array_push($js_to_load,$this->base_url()."/../js/jquery v3.1.1.js");
+		array_push($js_to_load,$this->base_url()."/../js/logn.js");
+		$data=array();
+		$data["js_to_load"]=$js_to_load;
+		$this -> load -> view('init',data["js_to_load"]);
 	}
 }
