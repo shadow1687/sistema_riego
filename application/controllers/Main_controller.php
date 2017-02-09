@@ -25,8 +25,8 @@ class Main_controller extends CI_Controller {
 
 
 		$data["estado"]=1;
-		$this -> load -> view("login");
-		//$this->load->view('portal',$data);
+		//$this -> load -> view("login");
+		$this->load->view('portal',$data);
 	}
 
 	public function load_variables(){
